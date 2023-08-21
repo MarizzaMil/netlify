@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const connectToDB = async () => {
   try {
     mongoose.set('strictQuery', true);
-    const connectionString = `${process.env.DB_URL}/${process.env.DB_NAME}?retryWrites=true&w=majority`;
+    const connectionString = `mongodb+srv://marizzamil89:d3tqMgzW86359LfB@netlify.d0dqquy.mongodb.net/test?retryWrites=true&w=majority`;
     mongoose.connect(connectionString, { useNewUrlParser: true, useUnifiedTopology: true })
       .then(() => console.log("mongoose Connected!"))
       .catch(error => {
