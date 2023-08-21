@@ -3,12 +3,9 @@ const connectToDB = require('../../../src/db')
 const getHeroesModel = require('./model');
 const router = express.Router()
 
-
 router.get('/hello', (req, res) => {
   res.status(200).json({ "test": "Hello, Hero"});
 })
-
-
 
 router.get('/', async (req, res) => {
     await connectToDB();
