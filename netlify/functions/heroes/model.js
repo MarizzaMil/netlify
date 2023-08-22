@@ -27,30 +27,50 @@
 
 // module.exports = getHeroesModel;
 
+// const connectToDB = require('../../../src/db');
+
+// const getHeroesModel = () => {
+//   const db = connectToDB();
+
+//   return {
+//     findAll: (callback) => {
+//       const query = 'SELECT * FROM heroes';
+//       db.all(query, [], (err, rows) => {
+//         if (err) {
+//           console.error('SQLite query error:', err.message);
+//           callback([]);
+//         } else {
+//           callback(rows);
+//         }
+//       });
+//     }
+//     // ... other functions as needed
+//   };
+// };
+
+// module.exports = getHeroesModel;
+
+
 const connectToDB = require('../../../src/db');
 
 const getHeroesModel = () => {
-  const db = connectToDB();
+    const db = connectToDB();
 
-  return {
-    findAll: (callback) => {
-      const query = 'SELECT * FROM heroes';
-      db.all(query, [], (err, rows) => {
-        if (err) {
-          console.error('SQLite query error:', err.message);
-          callback([]);
-        } else {
-          callback(rows);
-        }
-      });
-    }
-    // ... other functions as needed
-  };
+    return {
+        findAll: async (callback) => {
+            try {
+                const result = await db.query('SELECT * FROM jobs');
+                callback(result.rows);
+            } catch (err) {
+                console.error('CockroachDB query error:', err.message);
+                callback([]);
+            }
+        },
+        // ... other functions as needed
+    };
 };
 
 module.exports = getHeroesModel;
-
-
 
 
 

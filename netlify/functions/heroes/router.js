@@ -7,11 +7,19 @@ router.get('/hello', (req, res) => {
   res.status(200).json({ "test": "Hello, Hero" });
 })
 
+// router.get('/heroes', async (req, res) => {
+//   const HeroModel = getHeroesModel();
+
+//   HeroModel.findAll((heroes) => {
+//     res.status(200).json(heroes);
+//   });
+// });
+
 router.get('/heroes', async (req, res) => {
   const HeroModel = getHeroesModel();
 
   HeroModel.findAll((heroes) => {
-    res.status(200).json(heroes);
+      res.status(200).json(heroes);
   });
 });
 
