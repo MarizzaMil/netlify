@@ -49,3 +49,9 @@ const getHeroesModel = () => {
 };
 
 module.exports = getHeroesModel;
+
+
+
+
+
+
