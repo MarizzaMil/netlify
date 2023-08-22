@@ -59,7 +59,7 @@ const getHeroesModel = () => {
     return {
         findAll: async (callback) => {
             try {
-                const result = await db.query('SELECT * FROM jobs');
+                const result = await db.query('SELECT * FROM heroes');
                 callback(result.rows);
             } catch (err) {
                 console.error('CockroachDB query error:', err.message);
