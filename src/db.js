@@ -52,7 +52,9 @@ const sqlite3 = require('sqlite3').verbose();
 const path = require('path');
 
 const connectToDB = () => {
-    const dbPath = path.join(__dirname, 'heroes.db');
+    // const dbPath = path.join(__dirname, 'heroes.db');
+    const dbPath = '/var/task/heroes.db';
+
     console.log('Database Path:', dbPath);
 
     const db = new sqlite3.Database(dbPath, (err) => {
