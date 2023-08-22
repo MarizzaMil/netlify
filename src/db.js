@@ -49,10 +49,11 @@
 
 
 const sqlite3 = require('sqlite3').verbose();
+const path = require('path');
 
 const connectToDB = () => {
-  const db = new sqlite3.Database('./heroes.db', (err) => {
-    if (err) {
+    const db = new sqlite3.Database(path.join(__dirname, 'heroes.db'), (err) => {
+        if (err) {
       console.error('SQLite connection error:', err.message);
     } else {
       console.log('Connected to the SQLite database');
