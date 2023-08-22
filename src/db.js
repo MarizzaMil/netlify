@@ -52,13 +52,16 @@ const sqlite3 = require('sqlite3').verbose();
 const path = require('path');
 
 const connectToDB = () => {
-    const db = new sqlite3.Database(path.join(__dirname, 'heroes.db'), (err) => {
+    const dbPath = path.join(__dirname, 'heroes.db');
+    console.log('Database Path:', dbPath);
+
+    const db = new sqlite3.Database(dbPath, (err) => {
         if (err) {
-      console.error('SQLite connection error:', err.message);
-    } else {
-      console.log('Connected to the SQLite database');
-    }
-  });
+            console.error('SQLite connection error:', err.message);
+        } else {
+            console.log('Connected to the SQLite database');
+        }
+    });
 
   db.serialize(() => {
     db.run(`
