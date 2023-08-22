@@ -23,6 +23,7 @@ router.get('/heroes', async (req, res) => {
   });
 });
 
+
 router.post('/heroes', async (req, res) => {
   const { name, superPower } = req.body;
 
@@ -30,47 +31,54 @@ router.post('/heroes', async (req, res) => {
     return res.status(400).json({ message: 'Name and superPower are required' });
   }
 
-  const db = connectToDB();
+  const HeroModel = getHeroesModel(); // Initialize the model
 
-  const insertStmt = db.prepare('INSERT INTO heroes (name, superPower) VALUES (?, ?)');
-  insertStmt.run(name, superPower);
-  insertStmt.finalize();
+  HeroModel.create(name, superPower, (err, message) => {
+    if (err) {
+      console.error(err);
+      return res.status(500).json({ message: 'Error creating hero' });
+    }
 
-  db.close();
-
-  res.status(201).json({ message: 'Hero created successfully' });
+    return res.status(201).json({ message: 'Hero created successfully' });
+  });
 });
 
+// Update a hero by ID
 router.put('/heroes/:id', async (req, res) => {
   const { id } = req.params;
   const { name, superPower } = req.body;
 
-  const db = connectToDB();
+  if (!name || !superPower) {
+    return res.status(400).json({ message: 'Name and superPower are required' });
+  }
 
-  const updateStmt = db.prepare('UPDATE heroes SET name = ?, superPower = ? WHERE id = ?');
-  updateStmt.run(name, superPower, id);
-  updateStmt.finalize();
+  const HeroModel = getHeroesModel(); // Initialize the model
 
-  db.close();
+  HeroModel.update(id, name, superPower, (err, message) => {
+    if (err) {
+      console.error(err);
+      return res.status(500).json({ message: 'Error updating hero' });
+    }
 
-  res.status(200).json({ message: 'Hero updated successfully' });
+    return res.status(200).json({ message: 'Hero updated successfully' });
+  });
 });
 
 // Delete a hero by ID
 router.delete('/heroes/:id', async (req, res) => {
   const { id } = req.params;
 
-  const db = connectToDB();
+  const HeroModel = getHeroesModel(); // Initialize the model
 
-  const deleteStmt = db.prepare('DELETE FROM heroes WHERE id = ?');
-  deleteStmt.run(id);
-  deleteStmt.finalize();
+  HeroModel.delete(id, (err, message) => {
+    if (err) {
+      console.error(err);
+      return res.status(500).json({ message: 'Error deleting hero' });
+    }
 
-  db.close();
-
-  res.status(200).json({ message: 'Hero deleted successfully' });
+    return res.status(200).json({ message: 'Hero deleted successfully' });
+  });
 });
-
 // router.get('/', async (req, res) => {
 //     await connectToDB();
 
