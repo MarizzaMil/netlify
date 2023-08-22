@@ -19,6 +19,7 @@ app.use(function(req, res, next) {
   }
 });
 
-app.use('/.netlify/functions/heroes', router)
+app.use(express.json());
+app.use('/.netlify/functions', router)
 
 module.exports.handler = serverless(app)
