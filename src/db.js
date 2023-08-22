@@ -2,11 +2,11 @@ const { Client } = require('pg');
 
 const connectToDB = () => {
     const client = new Client({
-        user: 'marizza',
-        host: 'heroes-9840.8nj.cockroachlabs.cloud',
-        database: 'heroes_db',
-        password: 'NJ-WIp-tqZiDv4jQvOrB3w',
-        port: 26257, // Default CockroachDB port
+        user: process.env.DB_USER,
+        host: process.env.DB_HOST,
+        database: process.env.DB_NAME,
+        password: process.env.DB_PASSWORD,
+        port: process.env.DB_PORT, // Default CockroachDB port
         ssl: {
             rejectUnauthorized: false, // For local development
         },
