@@ -7,7 +7,9 @@ require('dotenv').config();
 const app = express()
 
 app.use(function (req, res, next) {
-  const allowedHosts = ['charming-shortbread-286ef1.netlify.app', 'main--charming-shortbread-286ef1.netlify.app', 'localhost:8888'];
+  const allowedHosts = ['charming-shortbread-286ef1.netlify.app', 
+  'main--charming-shortbread-286ef1.netlify.app', 
+  'localhost:8888'];
   const host = req.headers.host;
   console.log(`host: ${host}`)
 

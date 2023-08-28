@@ -1,20 +1,8 @@
-const { Client } = require('pg');
+const fs = require('firebase-admin');
+const serviceAccount = require('./serviceAccountKey.json');
+fs.initializeApp({
+ credential: fs.credential.cert(serviceAccount)
+});
 
-const connectToDB = () => {
-    const client = new Client({
-        user: process.env.DB_USER,
-        host: process.env.DB_HOST,
-        database: process.env.DB_NAME,
-        password: process.env.DB_PASSWORD,
-        port: process.env.DB_PORT, // Default CockroachDB port
-        ssl: {
-            rejectUnauthorized: false, // For local development
-        },
-    });
-    
-    client.connect();
-    
-    return client;
-};
-
-module.exports = connectToDB;
+  const firestore = fs.firestore();
+  module.exports = firestore;
