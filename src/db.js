@@ -6,3 +6,5 @@ fs.initializeApp({
 
   const firestore = fs.firestore();
   module.exports = firestore;
+
+  

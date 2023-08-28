@@ -25,3 +25,4 @@ app.use(express.json());
 app.use('/.netlify/functions', router)
 
 module.exports.handler = serverless(app)
+

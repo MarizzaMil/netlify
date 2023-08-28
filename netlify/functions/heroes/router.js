@@ -31,36 +31,31 @@ router.post('/heroes', async (req, res) => {
 router.put('/heroes/:id', async (req, res) => {
   const { id } = req.params;
   const { name, superPower } = req.body;
-
   if (!name || !superPower) {
     return res.status(400).json({ message: 'Name and superPower are required' });
   }
-
   const HeroModel = getHeroesModel(); // Initialize the model
-
   HeroModel.update(id, name, superPower, (err, message) => {
     if (err) {
       console.error(err);
       return res.status(500).json({ message: 'Error updating hero' });
     }
-
     return res.status(200).json({ message: 'Hero updated successfully' });
   });
 });
 
 router.delete('/heroes/:id', async (req, res) => {
   const { id } = req.params;
-
   const HeroModel = getHeroesModel(); // Initialize the model
 
-  HeroModel.delete(id, (err, message) => {
+  HeroModeldelete(id, (err, message) => {
     if (err) {
       console.error(err);
       return res.status(500).json({ message: 'Error deleting hero' });
     }
-
     return res.status(200).json({ message: 'Hero deleted successfully' });
   });
 });
 
 module.exports = router;
+
